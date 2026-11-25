@@ -1,0 +1,50 @@
+"""Q-SHIELD ML-KEM-768 + HKDF-SHA256 + AES-256-GCM demonstration.
+
+ML-KEM-768 key establishment follows NIST FIPS 203. AES-GCM is symmetric
+authenticated encryption; it is not a post-quantum algorithm. This example
+is educational and is not a complete application protocol.
+"""
+import os
+
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.asymmetric.mlkem import MLKEM768PrivateKey
+from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+from cryptography.hazmat.primitives.kdf.hkdf import HKDF
+
+# Receiver creates an ML-KEM-768 key pair.
+recipient_private_key = MLKEM768PrivateKey.generate()
+recipient_public_key = recipient_private_key.public_key()
+
+# Sender establishes a shared secret using encapsulation.
+shared_secret_sender, kem_ciphertext = recipient_public_key.encapsulate()
+
+# Receiver obtains the same secret using decapsulation.
+shared_secret_recipient = recipient_private_key.decapsulate(kem_ciphertext)
+assert shared_secret_sender == shared_secret_recipient
+
+# Derive an independent 256-bit AES key from the KEM shared secret.
+salt = os.urandom(16)
+aead_key = HKDF(
+    algorithm=hashes.SHA256(),
+    length=32,
+    salt=salt,
+    info=b"Q-SHIELD ML-KEM-768 demo v1",
+).derive(shared_secret_sender)
+
+# Encrypt and authenticate a sample message using AES-256-GCM.
+nonce = os.urandom(12)
+associated_data = b"Q-SHIELD demo metadata v1"
+plaintext = b"Q-SHIELD post-quantum migration demonstration"
+aesgcm = AESGCM(aead_key)
+ciphertext = aesgcm.encrypt(nonce, plaintext, associated_data)
+recovered = aesgcm.decrypt(nonce, ciphertext, associated_data)
+assert recovered == plaintext
+
+print("ML-KEM-768 key generation: PASS")
+print("ML-KEM-768 encapsulation/decapsulation: PASS")
+print("Shared-secret equality: PASS")
+print("HKDF-SHA256 key derivation: PASS")
+print("AES-256-GCM authenticated encryption/decryption: PASS")
+print(f"ML-KEM ciphertext bytes: {len(kem_ciphertext)}")
+print(f"AES-GCM ciphertext bytes (including tag): {len(ciphertext)}")
+print(f"Recovered plaintext matches: {recovered == plaintext}")

@@ -1,0 +1,174 @@
+{
+  "audit_id": "99a360fd-a9c6-4131-a93b-806f17b902b3",
+  "module": "7.10",
+  "workflow": "Q-SHIELD_END_TO_END_PQC_MIGRATION_AUDIT",
+  "created_at": "2026-11-11T18:02:41.432274+00:00",
+  "status": "REVIEW_IN_PROGRESS",
+  "source_filename": "module710_sample.zip",
+  "source_sha256": "73423ee87f59ce5c05c4167fd595034e4a09335acd8f845aca733ddaffe9b2d1",
+  "source_retained": false,
+  "source_modified": false,
+  "policy_profile": "TRANSITION",
+  "scanned_files": [
+    "crypto_demo.py",
+    "hashing.py"
+  ],
+  "algorithm_inventory": {
+    "RSA": 1,
+    "Cryptographic API": 2,
+    "SHA-256": 1
+  },
+  "readiness": {
+    "score": 93,
+    "risk_level": "LOW",
+    "method": "100 minus severity-weighted scanner penalties; heuristic only, not certification"
+  },
+  "recommendations": [
+    {
+      "policy_action": "PLAN_PQC_MIGRATION",
+      "target_guidance": "ML-KEM for key establishment; ML-DSA for signatures",
+      "priority": "HIGH",
+      "affected_findings": 1
+    },
+    {
+      "policy_action": "MANUAL_REVIEW",
+      "target_guidance": "Review the cryptographic API implementation",
+      "priority": "INFO",
+      "affected_findings": 2
+    },
+    {
+      "policy_action": "RETAIN_AND_REVIEW_USAGE",
+      "target_guidance": "Retain for suitable integrity/hash use; use Argon2id for passwords",
+      "priority": "INFO",
+      "affected_findings": 1
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "F-5164715A9B",
+      "file": "crypto_demo.py",
+      "line_number": 3,
+      "algorithm": "RSA",
+      "algorithm_type": "Asymmetric",
+      "severity": "HIGH",
+      "finding": "Migration planning",
+      "recommendation": "Review and plan post-quantum migration",
+      "policy_action": "PLAN_PQC_MIGRATION",
+      "target_guidance": "ML-KEM for key establishment; ML-DSA for signatures",
+      "policy_priority": "HIGH",
+      "policy_rationale": "Classify the RSA operation first; do not perform a blind algorithm substitution.",
+      "policy_status": "MIGRATION_PLAN_REQUIRED",
+      "decision": "APPROVE_REMEDIATION_PLAN",
+      "decision_note": "Approved. Classify the RSA operation and prepare a controlled migration plan to an appropriate post-quantum mechanism.",
+      "exception_expiry": null
+    },
+    {
+      "finding_id": "F-11A9BFF9DB",
+      "file": "crypto_demo.py",
+      "line_number": 3,
+      "algorithm": "Cryptographic API",
+      "algorithm_type": "Implementation",
+      "severity": "INFO",
+      "finding": "Cryptographic API usage detected through Python AST",
+      "recommendation": "Review the cryptographic API implementation",
+      "policy_action": "MANUAL_REVIEW",
+      "target_guidance": "Review the cryptographic API implementation",
+      "policy_priority": "INFO",
+      "policy_rationale": "No dedicated rule exists in the current Q-SHIELD policy catalog.",
+      "policy_status": "MIGRATION_PLAN_REQUIRED",
+      "decision": "PENDING",
+      "decision_note": null,
+      "exception_expiry": null
+    },
+    {
+      "finding_id": "F-9FE35FA61C",
+      "file": "hashing.py",
+      "line_number": 4,
+      "algorithm": "Cryptographic API",
+      "algorithm_type": "Implementation",
+      "severity": "INFO",
+      "finding": "Cryptographic API usage detected through Python AST",
+      "recommendation": "Review the cryptographic API implementation",
+      "policy_action": "MANUAL_REVIEW",
+      "target_guidance": "Review the cryptographic API implementation",
+      "policy_priority": "INFO",
+      "policy_rationale": "No dedicated rule exists in the current Q-SHIELD policy catalog.",
+      "policy_status": "MIGRATION_PLAN_REQUIRED",
+      "decision": "PENDING",
+      "decision_note": null,
+      "exception_expiry": null
+    },
+    {
+      "finding_id": "F-70777CC146",
+      "file": "hashing.py",
+      "line_number": 4,
+      "algorithm": "SHA-256",
+      "algorithm_type": "Hashing",
+      "severity": "INFO",
+      "finding": "Modern digest adoption",
+      "recommendation": "Modern digest detected; confirm intended use and protocol compatibility.",
+      "policy_action": "RETAIN_AND_REVIEW_USAGE",
+      "target_guidance": "Retain for suitable integrity/hash use; use Argon2id for passwords",
+      "policy_priority": "INFO",
+      "policy_rationale": "SHA-256 is not itself a PQC migration finding.",
+      "policy_status": "COMPLIANT_OR_INFORMATIONAL",
+      "decision": "PENDING",
+      "decision_note": null,
+      "exception_expiry": null
+    }
+  ],
+  "verification_evidence": {
+    "static_source_presence": {
+      "ML-KEM": false,
+      "ML-DSA": false
+    },
+    "provider_self_test": {
+      "status": "NOT_RUN",
+      "note": "Use dedicated Module 7.3/7.4/8.3 provider verification endpoints."
+    },
+    "uploaded_code_executed": false,
+    "interpretation": "Filename presence is discovery evidence only; it does not prove API semantics, parameter sets, key handling, protocol integration or runtime behavior."
+  },
+  "summary": {
+    "total_findings": 4,
+    "status_counts": {
+      "MIGRATION_PLAN_REQUIRED": 3,
+      "COMPLIANT_OR_INFORMATIONAL": 1
+    },
+    "pending_decisions": 3,
+    "critical_or_high": 1,
+    "scanned_files": 2,
+    "policy_profile": "TRANSITION",
+    "decision_counts": {
+      "PENDING": 3,
+      "APPROVED": 1,
+      "EXCEPTION": 0,
+      "DEFERRED": 0
+    }
+  },
+  "audit_events": [
+    {
+      "event": "END_TO_END_AUDIT_CREATED",
+      "timestamp": "2026-11-11T18:02:41.432274+00:00",
+      "actor": "system",
+      "details": "Static scan, inventory aggregation, policy recommendations, readiness heuristic and evidence aggregation completed."
+    },
+    {
+      "event": "FINDING_DECISION_RECORDED",
+      "timestamp": "2026-11-11T18:08:34.461507+00:00",
+      "actor": "Pavanaj - Reviewer",
+      "finding_id": "F-5164715A9B",
+      "decision": "APPROVE_REMEDIATION_PLAN",
+      "note": "Approved. Classify the RSA operation and prepare a controlled migration plan to an appropriate post-quantum mechanism.",
+      "exception_expiry": null
+    }
+  ],
+  "limitations": [
+    "Static analysis only; uploaded project code is never executed.",
+    "Readiness score is a heuristic and is not certification.",
+    "Findings may include false positives or false negatives.",
+    "No source files are modified; uploaded source is not retained.",
+    "Runtime provider self-tests and detailed ML-KEM/ML-DSA verification remain separate evidence sources.",
+    "Human decisions are governance records, not source remediation."
+  ]
+}
