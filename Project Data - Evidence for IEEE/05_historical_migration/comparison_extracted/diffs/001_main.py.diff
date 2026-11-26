@@ -1,0 +1,11 @@
+--- before/main.py
++++ after/main.py
+@@ -10,7 +10,7 @@
+ )
+ 
+ # Weak hashing algorithm
+-password_hash = hashlib.md5(b"demo_password")
++password_hash = hashlib.sha256(b"demo_password")
+ 
+ # AES-256 implementation
+ cipher = algorithms.AES(

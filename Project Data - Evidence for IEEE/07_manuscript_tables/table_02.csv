@@ -1,0 +1,9 @@
+Metric,Control,Migration
+Resolved,0,1
+Remaining,17,16
+New,0,0
+PQC detections,0,3
+Readiness before,5,5
+Readiness after,5,25
+Resolution (%),0,5.88
+Movement,0,+20

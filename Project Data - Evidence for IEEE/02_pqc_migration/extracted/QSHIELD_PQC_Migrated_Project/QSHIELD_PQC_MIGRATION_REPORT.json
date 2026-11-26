@@ -1,0 +1,38 @@
+{
+  "product": "Q-SHIELD",
+  "module": "8.2",
+  "profile": "Python ECDH demo to ML-KEM-768",
+  "generated_at": "2026-11-10T10:55:41.845296+00:00",
+  "original_archive_sha256": "fd93df665a42daf3d2d8219393a6bc173876b368cc5257ad205dffc6f0c6f6ec",
+  "modified_files": [
+    {
+      "file": "ecc_test.py",
+      "from": "Unused ECDH demonstration stub",
+      "to": "Working ML-KEM-768 encapsulation/decapsulation demonstration",
+      "status": "TRANSFORMED_DEMO",
+      "note": "Only the non-operational demo stub was replaced; no live exchange protocol was rewritten."
+    }
+  ],
+  "manual_migration_actions": [
+    {
+      "file": "main.py",
+      "status": "MANUAL_MIGRATION_REQUIRED",
+      "reason": "Real key agreement, RSA encryption or signature semantics require protocol-aware redesign; source was not rewritten."
+    },
+    {
+      "file": "security.py",
+      "status": "MANUAL_MIGRATION_REQUIRED",
+      "reason": "Real key agreement, RSA encryption or signature semantics require protocol-aware redesign; source was not rewritten."
+    }
+  ],
+  "pqc_status": "ML-KEM-768_DEMO_SCAFFOLD_ADDED",
+  "pqc_algorithm": "ML-KEM-768 (NIST FIPS 203)",
+  "syntax_validation": "Python source template is AST-validated by the Q-SHIELD test harness; execute only in a controlled test environment with a compatible cryptography release.",
+  "limitations": [
+    "Only a demonstrative Python ECDH stub with no exchange() call is transformed.",
+    "RSA encryption and RSA/ECDSA signatures are not automatically converted.",
+    "ML-KEM is key establishment, not a digital-signature replacement.",
+    "The generated demo requires cryptography>=50.0.0 with ML-KEM support.",
+    "This is not a production protocol or a claim of complete application PQC migration."
+  ]
+}

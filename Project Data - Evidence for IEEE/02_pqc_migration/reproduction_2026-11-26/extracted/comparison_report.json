@@ -1,0 +1,1198 @@
+{
+  "product": "Q-SHIELD",
+  "module": 8,
+  "comparison_id": "ebe0bc35-e554-4c40-966c-06162931ce09",
+  "created_at": "2026-11-26T15:17:36.699644+00:00",
+  "before": {
+    "project_name": "test_sample_migration",
+    "filename": "test_sample_migration.zip",
+    "archive_bytes": 1396,
+    "archive_sha256": "fd93df665a42daf3d2d8219393a6bc173876b368cc5257ad205dffc6f0c6f6ec",
+    "analysis": {
+      "file_count": 4,
+      "total_findings": 23,
+      "severity": {
+        "CRITICAL": 2,
+        "HIGH": 14,
+        "MEDIUM": 2,
+        "LOW": 1,
+        "INFO": 4
+      },
+      "algorithms": {
+        "AES": 2,
+        "MD5": 2,
+        "ECC": 1,
+        "RSA": 1,
+        "DES": 1,
+        "SHA-1": 1
+      },
+      "pqc_algorithms": {},
+      "pqc_evidence": [],
+      "pqc_verification_note": "Detected names and API-shaped expressions are evidence candidates only; no PQC implementation is marked verified automatically.",
+      "classical_algorithm_findings": 6,
+      "readiness": {
+        "readiness_score": 5,
+        "score": 5,
+        "risk_level": "CRITICAL",
+        "readiness_label": "Poor readiness",
+        "base_score": 100,
+        "total_risk_points": 95,
+        "risk_breakdown": {
+          "quantum_vulnerable": {
+            "count": 2,
+            "deduction": 40
+          },
+          "deprecated_algorithms": {
+            "count": 4,
+            "deduction": 30
+          },
+          "critical_findings": {
+            "count": 2,
+            "deduction": 10
+          },
+          "weak_configurations": {
+            "count": 7,
+            "deduction": 15
+          }
+        },
+        "reasons": [
+          {
+            "category": "Quantum-vulnerable cryptography",
+            "count": 2,
+            "deduction": 40,
+            "details": "2 RSA/ECC inventory records detected. These public-key algorithms are vulnerable to sufficiently capable quantum computers."
+          },
+          {
+            "category": "Deprecated algorithms",
+            "count": 4,
+            "deduction": 30,
+            "details": "4 MD5, SHA-1 or DES inventory records detected."
+          },
+          {
+            "category": "Critical security findings",
+            "count": 2,
+            "deduction": 10,
+            "details": "2 distinct critical findings detected. These require immediate security review."
+          },
+          {
+            "category": "Weak configurations",
+            "count": 7,
+            "deduction": 15,
+            "details": "7 distinct weak configuration findings detected."
+          }
+        ],
+        "scoring_method": "Shared rule-based weighted risk deductions using inventory records and deduplicated critical/weak findings.",
+        "method": "Shared rule-based weighted risk deductions using inventory records and deduplicated critical/weak findings."
+      },
+      "findings": [
+        {
+          "file_name": "config.js",
+          "line_number": 5,
+          "algorithm": "AES",
+          "algorithm_type": "Symmetric",
+          "detected_usage": "const algorithm = \"AES-256-CBC\";",
+          "finding": "Review encryption mode",
+          "severity": "MEDIUM",
+          "recommendation": "CBC does not provide authentication. Consider authenticated encryption such as AES-GCM"
+        },
+        {
+          "file_name": "config.js",
+          "line_number": 5,
+          "algorithm": "Weak Configuration",
+          "algorithm_type": "Configuration",
+          "detected_usage": "const algorithm = \"AES-256-CBC\";",
+          "finding": "AES CBC mode requires correct IV handling and separate authentication",
+          "severity": "MEDIUM",
+          "recommendation": "Review and replace the weak configuration"
+        },
+        {
+          "file_name": "config.js",
+          "line_number": 8,
+          "algorithm": "MD5",
+          "algorithm_type": "Hashing",
+          "detected_usage": "const hash = \"MD5\";",
+          "finding": "Deprecated / weak",
+          "severity": "HIGH",
+          "recommendation": "Replace or redesign this cryptographic usage"
+        },
+        {
+          "file_name": "config.js",
+          "line_number": 8,
+          "algorithm": "Weak Configuration",
+          "algorithm_type": "Configuration",
+          "detected_usage": "const hash = \"MD5\";",
+          "finding": "MD5 is unsuitable for security-sensitive hashing",
+          "severity": "HIGH",
+          "recommendation": "Review and replace the weak configuration"
+        },
+        {
+          "file_name": "config.js",
+          "line_number": 11,
+          "algorithm": "Weak Configuration",
+          "algorithm_type": "Configuration",
+          "detected_usage": "const tlsVersion = \"TLSv1.0\";",
+          "finding": "Legacy TLS protocol detected",
+          "severity": "HIGH",
+          "recommendation": "Review and replace the weak configuration"
+        },
+        {
+          "file_name": "config.js",
+          "line_number": 14,
+          "algorithm": "Hardcoded Secret",
+          "algorithm_type": "Secret",
+          "detected_usage": "[REDACTED]",
+          "finding": "Potential hardcoded credential or secret",
+          "severity": "CRITICAL",
+          "recommendation": "Remove the secret from source code, store it securely and rotate it"
+        },
+        {
+          "file_name": "ecc_test.py",
+          "line_number": 5,
+          "algorithm": "Cryptographic API",
+          "algorithm_type": "Implementation",
+          "detected_usage": "generate_private_key",
+          "finding": "Cryptographic API usage detected through Python AST",
+          "severity": "INFO",
+          "recommendation": "Review the cryptographic API implementation"
+        },
+        {
+          "file_name": "ecc_test.py",
+          "line_number": 5,
+          "algorithm": "ECC",
+          "algorithm_type": "Asymmetric",
+          "detected_usage": "private_key = ec.generate_private_key(",
+          "finding": "Migration planning",
+          "severity": "HIGH",
+          "recommendation": "Review and plan post-quantum migration"
+        },
+        {
+          "file_name": "ecc_test.py",
+          "line_number": 6,
+          "algorithm": "ECC",
+          "algorithm_type": "Asymmetric",
+          "detected_usage": "ec.SECP256R1()",
+          "finding": "Migration planning",
+          "severity": "HIGH",
+          "recommendation": "Review and plan post-quantum migration"
+        },
+        {
+          "file_name": "ecc_test.py",
+          "line_number": 10,
+          "algorithm": "ECC",
+          "algorithm_type": "Asymmetric",
+          "detected_usage": "shared_key_algorithm = ec.ECDH()",
+          "finding": "Migration planning",
+          "severity": "HIGH",
+          "recommendation": "Review and plan post-quantum migration"
+        },
+        {
+          "file_name": "main.py",
+          "line_number": 7,
+          "algorithm": "Cryptographic API",
+          "algorithm_type": "Implementation",
+          "detected_usage": "generate_private_key",
+          "finding": "Cryptographic API usage detected through Python AST",
+          "severity": "INFO",
+          "recommendation": "Review the cryptographic API implementation"
+        },
+        {
+          "file_name": "main.py",
+          "line_number": 7,
+          "algorithm": "RSA",
+          "algorithm_type": "Asymmetric",
+          "detected_usage": "private_key = rsa.generate_private_key(",
+          "finding": "Migration planning",
+          "severity": "HIGH",
+          "recommendation": "Review and plan post-quantum migration"
+        },
+        {
+          "file_name": "main.py",
+          "line_number": 13,
+          "algorithm": "Cryptographic API",
+          "algorithm_type": "Implementation",
+          "detected_usage": "md5",
+          "finding": "Cryptographic API usage detected through Python AST",
+          "severity": "INFO",
+          "recommendation": "Review the cryptographic API implementation"
+        },
+        {
+          "file_name": "main.py",
+          "line_number": 13,
+          "algorithm": "MD5",
+          "algorithm_type": "Hashing",
+          "detected_usage": "password_hash = hashlib.md5(b\"demo_password\")",
+          "finding": "Deprecated / weak",
+          "severity": "HIGH",
+          "recommendation": "Replace or redesign this cryptographic usage"
+        },
+        {
+          "file_name": "main.py",
+          "line_number": 13,
+          "algorithm": "Weak Configuration",
+          "algorithm_type": "Configuration",
+          "detected_usage": "password_hash = hashlib.md5(b\"demo_password\")",
+          "finding": "MD5 is unsuitable for security-sensitive hashing",
+          "severity": "HIGH",
+          "recommendation": "Review and replace the weak configuration"
+        },
+        {
+          "file_name": "main.py",
+          "line_number": 16,
+          "algorithm": "AES",
+          "algorithm_type": "Symmetric",
+          "detected_usage": "cipher = algorithms.AES(",
+          "finding": "Retain, review mode",
+          "severity": "LOW",
+          "recommendation": "Verify that an authenticated encryption mode is being used"
+        },
+        {
+          "file_name": "main.py",
+          "line_number": 21,
+          "algorithm": "Hardcoded Secret",
+          "algorithm_type": "Secret",
+          "detected_usage": "[REDACTED]",
+          "finding": "Potential hardcoded credential or secret",
+          "severity": "CRITICAL",
+          "recommendation": "Remove the secret from source code, store it securely and rotate it"
+        },
+        {
+          "file_name": "security.py",
+          "line_number": 5,
+          "algorithm": "Cryptographic API",
+          "algorithm_type": "Implementation",
+          "detected_usage": "sha1",
+          "finding": "Cryptographic API usage detected through Python AST",
+          "severity": "INFO",
+          "recommendation": "Review the cryptographic API implementation"
+        },
+        {
+          "file_name": "security.py",
+          "line_number": 5,
+          "algorithm": "SHA-1",
+          "algorithm_type": "Hashing",
+          "detected_usage": "signature_hash = hashlib.sha1(b\"sample data\")",
+          "finding": "Deprecated / weak",
+          "severity": "HIGH",
+          "recommendation": "Replace or redesign this cryptographic usage"
+        },
+        {
+          "file_name": "security.py",
+          "line_number": 5,
+          "algorithm": "Weak Configuration",
+          "algorithm_type": "Configuration",
+          "detected_usage": "signature_hash = hashlib.sha1(b\"sample data\")",
+          "finding": "SHA-1 is deprecated for collision-resistant applications",
+          "severity": "HIGH",
+          "recommendation": "Review and replace the weak configuration"
+        },
+        {
+          "file_name": "security.py",
+          "line_number": 8,
+          "algorithm": "DES",
+          "algorithm_type": "Symmetric",
+          "detected_usage": "legacy_cipher = \"DES encryption\"",
+          "finding": "Deprecated / weak",
+          "severity": "HIGH",
+          "recommendation": "Replace or redesign this cryptographic usage"
+        },
+        {
+          "file_name": "security.py",
+          "line_number": 8,
+          "algorithm": "Weak Configuration",
+          "algorithm_type": "Configuration",
+          "detected_usage": "legacy_cipher = \"DES encryption\"",
+          "finding": "DES/3DES is deprecated or legacy cryptography",
+          "severity": "HIGH",
+          "recommendation": "Review and replace the weak configuration"
+        },
+        {
+          "file_name": "security.py",
+          "line_number": 11,
+          "algorithm": "Weak Configuration",
+          "algorithm_type": "Configuration",
+          "detected_usage": "verify = False",
+          "finding": "TLS certificate verification appears disabled",
+          "severity": "HIGH",
+          "recommendation": "Review and replace the weak configuration"
+        }
+      ],
+      "files": {
+        "config.js": {
+          "lines": 21,
+          "sha256": "0a7d12a34480360e355008c26dfb70b92c8f2e0d121ef15769ecb0586fc7923f",
+          "bytes": 387
+        },
+        "ecc_test.py": {
+          "lines": 15,
+          "sha256": "3e43cdea34758fe0b960d982bd608dcabcc6692aafb138a134e6d38497022f1f",
+          "bytes": 360
+        },
+        "main.py": {
+          "lines": 21,
+          "sha256": "7e5cf65358929e7c7f283a1bee210b85c1ec9334cbba40fc327ec0e7857e45c1",
+          "bytes": 528
+        },
+        "security.py": {
+          "lines": 14,
+          "sha256": "7397491ea638965357130549b6a8028f4d5695361d68cd4787c7fdbfaaf74582",
+          "bytes": 285
+        }
+      },
+      "source_bytes": 1560
+    }
+  },
+  "after": {
+    "project_name": "QSHIELD_PQC_Migrated_Project",
+    "filename": "QSHIELD_PQC_Migrated_Project.zip",
+    "archive_bytes": 3600,
+    "archive_sha256": "524a82a1bd7b2f375878e1dd84a48a128490d82fed1b30b5118884befd4a95d8",
+    "analysis": {
+      "file_count": 4,
+      "total_findings": 26,
+      "severity": {
+        "CRITICAL": 2,
+        "HIGH": 11,
+        "MEDIUM": 2,
+        "LOW": 1,
+        "INFO": 10
+      },
+      "algorithms": {
+        "AES": 3,
+        "MD5": 2,
+        "SHA-256": 1,
+        "RSA": 1,
+        "DES": 1,
+        "SHA-1": 1
+      },
+      "pqc_algorithms": {
+        "ML-KEM": 3
+      },
+      "pqc_evidence": [
+        {
+          "algorithm": "ML-KEM",
+          "token": "mlkem",
+          "file": "ecc_test.py",
+          "line": 10,
+          "classification": "TOKEN_REFERENCE",
+          "verification": "UNVERIFIED",
+          "note": "Static source evidence only; run the dedicated verifier for functional evidence."
+        },
+        {
+          "algorithm": "ML-KEM",
+          "token": "MLKEM768PrivateKey",
+          "file": "ecc_test.py",
+          "line": 10,
+          "classification": "TOKEN_REFERENCE",
+          "verification": "UNVERIFIED",
+          "note": "Static source evidence only; run the dedicated verifier for functional evidence."
+        },
+        {
+          "algorithm": "ML-KEM",
+          "token": "MLKEM768PrivateKey",
+          "file": "ecc_test.py",
+          "line": 15,
+          "classification": "API_USAGE_CANDIDATE",
+          "verification": "UNVERIFIED",
+          "note": "Static source evidence only; run the dedicated verifier for functional evidence."
+        }
+      ],
+      "pqc_verification_note": "Detected names and API-shaped expressions are evidence candidates only; no PQC implementation is marked verified automatically.",
+      "classical_algorithm_findings": 5,
+      "readiness": {
+        "readiness_score": 25,
+        "score": 25,
+        "risk_level": "CRITICAL",
+        "readiness_label": "Poor readiness",
+        "base_score": 100,
+        "total_risk_points": 75,
+        "risk_breakdown": {
+          "quantum_vulnerable": {
+            "count": 1,
+            "deduction": 20
+          },
+          "deprecated_algorithms": {
+            "count": 4,
+            "deduction": 30
+          },
+          "critical_findings": {
+            "count": 2,
+            "deduction": 10
+          },
+          "weak_configurations": {
+            "count": 7,
+            "deduction": 15
+          }
+        },
+        "reasons": [
+          {
+            "category": "Quantum-vulnerable cryptography",
+            "count": 1,
+            "deduction": 20,
+            "details": "1 RSA/ECC inventory records detected. These public-key algorithms are vulnerable to sufficiently capable quantum computers."
+          },
+          {
+            "category": "Deprecated algorithms",
+            "count": 4,
+            "deduction": 30,
+            "details": "4 MD5, SHA-1 or DES inventory records detected."
+          },
+          {
+            "category": "Critical security findings",
+            "count": 2,
+            "deduction": 10,
+            "details": "2 distinct critical findings detected. These require immediate security review."
+          },
+          {
+            "category": "Weak configurations",
+            "count": 7,
+            "deduction": 15,
+            "details": "7 distinct weak configuration findings detected."
+          }
+        ],
+        "scoring_method": "Shared rule-based weighted risk deductions using inventory records and deduplicated critical/weak findings.",
+        "method": "Shared rule-based weighted risk deductions using inventory records and deduplicated critical/weak findings."
+      },
+      "findings": [
+        {
+          "file_name": "config.js",
+          "line_number": 5,
+          "algorithm": "AES",
+          "algorithm_type": "Symmetric",
+          "detected_usage": "const algorithm = \"AES-256-CBC\";",
+          "finding": "Review encryption mode",
+          "severity": "MEDIUM",
+          "recommendation": "CBC does not provide authentication. Consider authenticated encryption such as AES-GCM"
+        },
+        {
+          "file_name": "config.js",
+          "line_number": 5,
+          "algorithm": "Weak Configuration",
+          "algorithm_type": "Configuration",
+          "detected_usage": "const algorithm = \"AES-256-CBC\";",
+          "finding": "AES CBC mode requires correct IV handling and separate authentication",
+          "severity": "MEDIUM",
+          "recommendation": "Review and replace the weak configuration"
+        },
+        {
+          "file_name": "config.js",
+          "line_number": 8,
+          "algorithm": "MD5",
+          "algorithm_type": "Hashing",
+          "detected_usage": "const hash = \"MD5\";",
+          "finding": "Deprecated / weak",
+          "severity": "HIGH",
+          "recommendation": "Replace or redesign this cryptographic usage"
+        },
+        {
+          "file_name": "config.js",
+          "line_number": 8,
+          "algorithm": "Weak Configuration",
+          "algorithm_type": "Configuration",
+          "detected_usage": "const hash = \"MD5\";",
+          "finding": "MD5 is unsuitable for security-sensitive hashing",
+          "severity": "HIGH",
+          "recommendation": "Review and replace the weak configuration"
+        },
+        {
+          "file_name": "config.js",
+          "line_number": 11,
+          "algorithm": "Weak Configuration",
+          "algorithm_type": "Configuration",
+          "detected_usage": "const tlsVersion = \"TLSv1.0\";",
+          "finding": "Legacy TLS protocol detected",
+          "severity": "HIGH",
+          "recommendation": "Review and replace the weak configuration"
+        },
+        {
+          "file_name": "config.js",
+          "line_number": 14,
+          "algorithm": "Hardcoded Secret",
+          "algorithm_type": "Secret",
+          "detected_usage": "[REDACTED]",
+          "finding": "Potential hardcoded credential or secret",
+          "severity": "CRITICAL",
+          "recommendation": "Remove the secret from source code, store it securely and rotate it"
+        },
+        {
+          "file_name": "ecc_test.py",
+          "line_number": 28,
+          "algorithm": "SHA-256",
+          "algorithm_type": "Hashing",
+          "detected_usage": "algorithm=hashes.SHA256(),",
+          "finding": "Modern digest adoption",
+          "severity": "INFO",
+          "recommendation": "Modern digest detected; confirm intended use and protocol compatibility."
+        },
+        {
+          "file_name": "ecc_test.py",
+          "line_number": 38,
+          "algorithm": "AES",
+          "algorithm_type": "Symmetric",
+          "detected_usage": "aesgcm = AESGCM(aead_key)",
+          "finding": "Authenticated encryption adoption",
+          "severity": "INFO",
+          "recommendation": "AES-GCM provides authenticated encryption; verify nonce uniqueness, authentication-tag handling and associated-data consistency."
+        },
+        {
+          "file_name": "ecc_test.py",
+          "line_number": 38,
+          "algorithm": "Cryptographic API",
+          "algorithm_type": "Implementation",
+          "detected_usage": "AESGCM",
+          "finding": "Cryptographic API usage detected through Python AST",
+          "severity": "INFO",
+          "recommendation": "Review the cryptographic API implementation"
+        },
+        {
+          "file_name": "ecc_test.py",
+          "line_number": 39,
+          "algorithm": "AES",
+          "algorithm_type": "Symmetric",
+          "detected_usage": "ciphertext = aesgcm.encrypt(nonce, plaintext, associated_data)",
+          "finding": "Authenticated encryption adoption",
+          "severity": "INFO",
+          "recommendation": "AES-GCM provides authenticated encryption; verify nonce uniqueness, authentication-tag handling and associated-data consistency."
+        },
+        {
+          "file_name": "ecc_test.py",
+          "line_number": 39,
+          "algorithm": "Cryptographic API",
+          "algorithm_type": "Implementation",
+          "detected_usage": "encrypt",
+          "finding": "Cryptographic API usage detected through Python AST",
+          "severity": "INFO",
+          "recommendation": "Review the cryptographic API implementation"
+        },
+        {
+          "file_name": "ecc_test.py",
+          "line_number": 40,
+          "algorithm": "AES",
+          "algorithm_type": "Symmetric",
+          "detected_usage": "recovered = aesgcm.decrypt(nonce, ciphertext, associated_data)",
+          "finding": "Authenticated encryption adoption",
+          "severity": "INFO",
+          "recommendation": "AES-GCM provides authenticated encryption; verify nonce uniqueness, authentication-tag handling and associated-data consistency."
+        },
+        {
+          "file_name": "ecc_test.py",
+          "line_number": 40,
+          "algorithm": "Cryptographic API",
+          "algorithm_type": "Implementation",
+          "detected_usage": "decrypt",
+          "finding": "Cryptographic API usage detected through Python AST",
+          "severity": "INFO",
+          "recommendation": "Review the cryptographic API implementation"
+        },
+        {
+          "file_name": "main.py",
+          "line_number": 7,
+          "algorithm": "Cryptographic API",
+          "algorithm_type": "Implementation",
+          "detected_usage": "generate_private_key",
+          "finding": "Cryptographic API usage detected through Python AST",
+          "severity": "INFO",
+          "recommendation": "Review the cryptographic API implementation"
+        },
+        {
+          "file_name": "main.py",
+          "line_number": 7,
+          "algorithm": "RSA",
+          "algorithm_type": "Asymmetric",
+          "detected_usage": "private_key = rsa.generate_private_key(",
+          "finding": "Migration planning",
+          "severity": "HIGH",
+          "recommendation": "Review and plan post-quantum migration"
+        },
+        {
+          "file_name": "main.py",
+          "line_number": 13,
+          "algorithm": "Cryptographic API",
+          "algorithm_type": "Implementation",
+          "detected_usage": "md5",
+          "finding": "Cryptographic API usage detected through Python AST",
+          "severity": "INFO",
+          "recommendation": "Review the cryptographic API implementation"
+        },
+        {
+          "file_name": "main.py",
+          "line_number": 13,
+          "algorithm": "MD5",
+          "algorithm_type": "Hashing",
+          "detected_usage": "password_hash = hashlib.md5(b\"demo_password\")",
+          "finding": "Deprecated / weak",
+          "severity": "HIGH",
+          "recommendation": "Replace or redesign this cryptographic usage"
+        },
+        {
+          "file_name": "main.py",
+          "line_number": 13,
+          "algorithm": "Weak Configuration",
+          "algorithm_type": "Configuration",
+          "detected_usage": "password_hash = hashlib.md5(b\"demo_password\")",
+          "finding": "MD5 is unsuitable for security-sensitive hashing",
+          "severity": "HIGH",
+          "recommendation": "Review and replace the weak configuration"
+        },
+        {
+          "file_name": "main.py",
+          "line_number": 16,
+          "algorithm": "AES",
+          "algorithm_type": "Symmetric",
+          "detected_usage": "cipher = algorithms.AES(",
+          "finding": "Retain, review mode",
+          "severity": "LOW",
+          "recommendation": "Verify that an authenticated encryption mode is being used"
+        },
+        {
+          "file_name": "main.py",
+          "line_number": 21,
+          "algorithm": "Hardcoded Secret",
+          "algorithm_type": "Secret",
+          "detected_usage": "[REDACTED]",
+          "finding": "Potential hardcoded credential or secret",
+          "severity": "CRITICAL",
+          "recommendation": "Remove the secret from source code, store it securely and rotate it"
+        },
+        {
+          "file_name": "security.py",
+          "line_number": 5,
+          "algorithm": "Cryptographic API",
+          "algorithm_type": "Implementation",
+          "detected_usage": "sha1",
+          "finding": "Cryptographic API usage detected through Python AST",
+          "severity": "INFO",
+          "recommendation": "Review the cryptographic API implementation"
+        },
+        {
+          "file_name": "security.py",
+          "line_number": 5,
+          "algorithm": "SHA-1",
+          "algorithm_type": "Hashing",
+          "detected_usage": "signature_hash = hashlib.sha1(b\"sample data\")",
+          "finding": "Deprecated / weak",
+          "severity": "HIGH",
+          "recommendation": "Replace or redesign this cryptographic usage"
+        },
+        {
+          "file_name": "security.py",
+          "line_number": 5,
+          "algorithm": "Weak Configuration",
+          "algorithm_type": "Configuration",
+          "detected_usage": "signature_hash = hashlib.sha1(b\"sample data\")",
+          "finding": "SHA-1 is deprecated for collision-resistant applications",
+          "severity": "HIGH",
+          "recommendation": "Review and replace the weak configuration"
+        },
+        {
+          "file_name": "security.py",
+          "line_number": 8,
+          "algorithm": "DES",
+          "algorithm_type": "Symmetric",
+          "detected_usage": "legacy_cipher = \"DES encryption\"",
+          "finding": "Deprecated / weak",
+          "severity": "HIGH",
+          "recommendation": "Replace or redesign this cryptographic usage"
+        },
+        {
+          "file_name": "security.py",
+          "line_number": 8,
+          "algorithm": "Weak Configuration",
+          "algorithm_type": "Configuration",
+          "detected_usage": "legacy_cipher = \"DES encryption\"",
+          "finding": "DES/3DES is deprecated or legacy cryptography",
+          "severity": "HIGH",
+          "recommendation": "Review and replace the weak configuration"
+        },
+        {
+          "file_name": "security.py",
+          "line_number": 11,
+          "algorithm": "Weak Configuration",
+          "algorithm_type": "Configuration",
+          "detected_usage": "verify = False",
+          "finding": "TLS certificate verification appears disabled",
+          "severity": "HIGH",
+          "recommendation": "Review and replace the weak configuration"
+        }
+      ],
+      "files": {
+        "config.js": {
+          "lines": 21,
+          "sha256": "0a7d12a34480360e355008c26dfb70b92c8f2e0d121ef15769ecb0586fc7923f",
+          "bytes": 387
+        },
+        "ecc_test.py": {
+          "lines": 50,
+          "sha256": "d5fac2d1a77b619ad0e92a81ff4c756848a31a57cd7937218f8294f56ec13931",
+          "bytes": 2063
+        },
+        "main.py": {
+          "lines": 21,
+          "sha256": "7e5cf65358929e7c7f283a1bee210b85c1ec9334cbba40fc327ec0e7857e45c1",
+          "bytes": 528
+        },
+        "security.py": {
+          "lines": 14,
+          "sha256": "7397491ea638965357130549b6a8028f4d5695361d68cd4787c7fdbfaaf74582",
+          "bytes": 285
+        }
+      },
+      "source_bytes": 3263
+    }
+  },
+  "comparison": {
+    "findings": {
+      "resolved": [
+        {
+          "file_name": "ecc_test.py",
+          "line_number": 10,
+          "algorithm": "ECC",
+          "algorithm_type": "Asymmetric",
+          "detected_usage": "shared_key_algorithm = ec.ECDH()",
+          "finding": "Migration planning",
+          "severity": "HIGH",
+          "recommendation": "Review and plan post-quantum migration"
+        }
+      ],
+      "remaining": [
+        {
+          "file_name": "config.js",
+          "line_number": 5,
+          "algorithm": "AES",
+          "algorithm_type": "Symmetric",
+          "detected_usage": "const algorithm = \"AES-256-CBC\";",
+          "finding": "Review encryption mode",
+          "severity": "MEDIUM",
+          "recommendation": "CBC does not provide authentication. Consider authenticated encryption such as AES-GCM"
+        },
+        {
+          "file_name": "config.js",
+          "line_number": 14,
+          "algorithm": "Hardcoded Secret",
+          "algorithm_type": "Secret",
+          "detected_usage": "[REDACTED]",
+          "finding": "Potential hardcoded credential or secret",
+          "severity": "CRITICAL",
+          "recommendation": "Remove the secret from source code, store it securely and rotate it"
+        },
+        {
+          "file_name": "config.js",
+          "line_number": 8,
+          "algorithm": "MD5",
+          "algorithm_type": "Hashing",
+          "detected_usage": "const hash = \"MD5\";",
+          "finding": "Deprecated / weak",
+          "severity": "HIGH",
+          "recommendation": "Replace or redesign this cryptographic usage"
+        },
+        {
+          "file_name": "config.js",
+          "line_number": 5,
+          "algorithm": "Weak Configuration",
+          "algorithm_type": "Configuration",
+          "detected_usage": "const algorithm = \"AES-256-CBC\";",
+          "finding": "AES CBC mode requires correct IV handling and separate authentication",
+          "severity": "MEDIUM",
+          "recommendation": "Review and replace the weak configuration"
+        },
+        {
+          "file_name": "config.js",
+          "line_number": 11,
+          "algorithm": "Weak Configuration",
+          "algorithm_type": "Configuration",
+          "detected_usage": "const tlsVersion = \"TLSv1.0\";",
+          "finding": "Legacy TLS protocol detected",
+          "severity": "HIGH",
+          "recommendation": "Review and replace the weak configuration"
+        },
+        {
+          "file_name": "config.js",
+          "line_number": 8,
+          "algorithm": "Weak Configuration",
+          "algorithm_type": "Configuration",
+          "detected_usage": "const hash = \"MD5\";",
+          "finding": "MD5 is unsuitable for security-sensitive hashing",
+          "severity": "HIGH",
+          "recommendation": "Review and replace the weak configuration"
+        },
+        {
+          "file_name": "main.py",
+          "line_number": 16,
+          "algorithm": "AES",
+          "algorithm_type": "Symmetric",
+          "detected_usage": "cipher = algorithms.AES(",
+          "finding": "Retain, review mode",
+          "severity": "LOW",
+          "recommendation": "Verify that an authenticated encryption mode is being used"
+        },
+        {
+          "file_name": "main.py",
+          "line_number": 21,
+          "algorithm": "Hardcoded Secret",
+          "algorithm_type": "Secret",
+          "detected_usage": "[REDACTED]",
+          "finding": "Potential hardcoded credential or secret",
+          "severity": "CRITICAL",
+          "recommendation": "Remove the secret from source code, store it securely and rotate it"
+        },
+        {
+          "file_name": "main.py",
+          "line_number": 13,
+          "algorithm": "MD5",
+          "algorithm_type": "Hashing",
+          "detected_usage": "password_hash = hashlib.md5(b\"demo_password\")",
+          "finding": "Deprecated / weak",
+          "severity": "HIGH",
+          "recommendation": "Replace or redesign this cryptographic usage"
+        },
+        {
+          "file_name": "main.py",
+          "line_number": 7,
+          "algorithm": "RSA",
+          "algorithm_type": "Asymmetric",
+          "detected_usage": "private_key = rsa.generate_private_key(",
+          "finding": "Migration planning",
+          "severity": "HIGH",
+          "recommendation": "Review and plan post-quantum migration"
+        },
+        {
+          "file_name": "main.py",
+          "line_number": 13,
+          "algorithm": "Weak Configuration",
+          "algorithm_type": "Configuration",
+          "detected_usage": "password_hash = hashlib.md5(b\"demo_password\")",
+          "finding": "MD5 is unsuitable for security-sensitive hashing",
+          "severity": "HIGH",
+          "recommendation": "Review and replace the weak configuration"
+        },
+        {
+          "file_name": "security.py",
+          "line_number": 8,
+          "algorithm": "DES",
+          "algorithm_type": "Symmetric",
+          "detected_usage": "legacy_cipher = \"DES encryption\"",
+          "finding": "Deprecated / weak",
+          "severity": "HIGH",
+          "recommendation": "Replace or redesign this cryptographic usage"
+        },
+        {
+          "file_name": "security.py",
+          "line_number": 5,
+          "algorithm": "SHA-1",
+          "algorithm_type": "Hashing",
+          "detected_usage": "signature_hash = hashlib.sha1(b\"sample data\")",
+          "finding": "Deprecated / weak",
+          "severity": "HIGH",
+          "recommendation": "Replace or redesign this cryptographic usage"
+        },
+        {
+          "file_name": "security.py",
+          "line_number": 8,
+          "algorithm": "Weak Configuration",
+          "algorithm_type": "Configuration",
+          "detected_usage": "legacy_cipher = \"DES encryption\"",
+          "finding": "DES/3DES is deprecated or legacy cryptography",
+          "severity": "HIGH",
+          "recommendation": "Review and replace the weak configuration"
+        },
+        {
+          "file_name": "security.py",
+          "line_number": 5,
+          "algorithm": "Weak Configuration",
+          "algorithm_type": "Configuration",
+          "detected_usage": "signature_hash = hashlib.sha1(b\"sample data\")",
+          "finding": "SHA-1 is deprecated for collision-resistant applications",
+          "severity": "HIGH",
+          "recommendation": "Review and replace the weak configuration"
+        },
+        {
+          "file_name": "security.py",
+          "line_number": 11,
+          "algorithm": "Weak Configuration",
+          "algorithm_type": "Configuration",
+          "detected_usage": "verify = False",
+          "finding": "TLS certificate verification appears disabled",
+          "severity": "HIGH",
+          "recommendation": "Review and replace the weak configuration"
+        }
+      ],
+      "new": [],
+      "informational": {
+        "before": [
+          {
+            "file_name": "ecc_test.py",
+            "line_number": 5,
+            "algorithm": "Cryptographic API",
+            "algorithm_type": "Implementation",
+            "detected_usage": "generate_private_key",
+            "finding": "Cryptographic API usage detected through Python AST",
+            "severity": "INFO",
+            "recommendation": "Review the cryptographic API implementation"
+          },
+          {
+            "file_name": "main.py",
+            "line_number": 7,
+            "algorithm": "Cryptographic API",
+            "algorithm_type": "Implementation",
+            "detected_usage": "generate_private_key",
+            "finding": "Cryptographic API usage detected through Python AST",
+            "severity": "INFO",
+            "recommendation": "Review the cryptographic API implementation"
+          },
+          {
+            "file_name": "main.py",
+            "line_number": 13,
+            "algorithm": "Cryptographic API",
+            "algorithm_type": "Implementation",
+            "detected_usage": "md5",
+            "finding": "Cryptographic API usage detected through Python AST",
+            "severity": "INFO",
+            "recommendation": "Review the cryptographic API implementation"
+          },
+          {
+            "file_name": "security.py",
+            "line_number": 5,
+            "algorithm": "Cryptographic API",
+            "algorithm_type": "Implementation",
+            "detected_usage": "sha1",
+            "finding": "Cryptographic API usage detected through Python AST",
+            "severity": "INFO",
+            "recommendation": "Review the cryptographic API implementation"
+          }
+        ],
+        "after": [
+          {
+            "file_name": "ecc_test.py",
+            "line_number": 38,
+            "algorithm": "Cryptographic API",
+            "algorithm_type": "Implementation",
+            "detected_usage": "AESGCM",
+            "finding": "Cryptographic API usage detected through Python AST",
+            "severity": "INFO",
+            "recommendation": "Review the cryptographic API implementation"
+          },
+          {
+            "file_name": "ecc_test.py",
+            "line_number": 39,
+            "algorithm": "Cryptographic API",
+            "algorithm_type": "Implementation",
+            "detected_usage": "encrypt",
+            "finding": "Cryptographic API usage detected through Python AST",
+            "severity": "INFO",
+            "recommendation": "Review the cryptographic API implementation"
+          },
+          {
+            "file_name": "ecc_test.py",
+            "line_number": 40,
+            "algorithm": "Cryptographic API",
+            "algorithm_type": "Implementation",
+            "detected_usage": "decrypt",
+            "finding": "Cryptographic API usage detected through Python AST",
+            "severity": "INFO",
+            "recommendation": "Review the cryptographic API implementation"
+          },
+          {
+            "file_name": "main.py",
+            "line_number": 7,
+            "algorithm": "Cryptographic API",
+            "algorithm_type": "Implementation",
+            "detected_usage": "generate_private_key",
+            "finding": "Cryptographic API usage detected through Python AST",
+            "severity": "INFO",
+            "recommendation": "Review the cryptographic API implementation"
+          },
+          {
+            "file_name": "main.py",
+            "line_number": 13,
+            "algorithm": "Cryptographic API",
+            "algorithm_type": "Implementation",
+            "detected_usage": "md5",
+            "finding": "Cryptographic API usage detected through Python AST",
+            "severity": "INFO",
+            "recommendation": "Review the cryptographic API implementation"
+          },
+          {
+            "file_name": "security.py",
+            "line_number": 5,
+            "algorithm": "Cryptographic API",
+            "algorithm_type": "Implementation",
+            "detected_usage": "sha1",
+            "finding": "Cryptographic API usage detected through Python AST",
+            "severity": "INFO",
+            "recommendation": "Review the cryptographic API implementation"
+          }
+        ]
+      },
+      "counts": {
+        "before": 17,
+        "after": 16,
+        "raw_scanner_before": 23,
+        "raw_scanner_after": 26,
+        "informational_before": 4,
+        "informational_after": 6,
+        "resolved": 1,
+        "remaining": 16,
+        "new": 0
+      }
+    },
+    "files": {
+      "common": 4,
+      "added": [],
+      "removed": [],
+      "renamed_identical_hash": []
+    },
+    "code_diffs": [
+      {
+        "file": "ecc_test.py",
+        "added_lines": 45,
+        "removed_lines": 10,
+        "diff": "--- before/ecc_test.py\n+++ after/ecc_test.py\n@@ -1,15 +1,50 @@\n+\"\"\"Q-SHIELD ML-KEM-768 + HKDF-SHA256 + AES-256-GCM demonstration.\n \n-from cryptography.hazmat.primitives.asymmetric import ec\n+ML-KEM-768 key establishment follows NIST FIPS 203. AES-GCM is symmetric\n+authenticated encryption; it is not a post-quantum algorithm. This example\n+is educational and is not a complete application protocol.\n+\"\"\"\n+import os\n \n-# Elliptic Curve Digital Signature Algorithm\n-private_key = ec.generate_private_key(\n-    ec.SECP256R1()\n-)\n+from cryptography.hazmat.primitives import hashes\n+from cryptography.hazmat.primitives.asymmetric.mlkem import MLKEM768PrivateKey\n+from cryptography.hazmat.primitives.ciphers.aead import AESGCM\n+from cryptography.hazmat.primitives.kdf.hkdf import HKDF\n \n-# Elliptic Curve Diffie-Hellman\n-shared_key_algorithm = ec.ECDH()\n+# Receiver creates an ML-KEM-768 key pair.\n+recipient_private_key = MLKEM768PrivateKey.generate()\n+recipient_public_key = recipient_private_key.public_key()\n \n-# Elliptic Curve public key\n-public_key = private_key.public_key()\n+# Sender establishes a shared secret using encapsulation.\n+shared_secret_sender, kem_ciphertext = recipient_public_key.encapsulate()\n \n-print(\"ECC cryptographic implementation test\")\n+# Receiver obtains the same secret using decapsulation.\n+shared_secret_recipient = recipient_private_key.decapsulate(kem_ciphertext)\n+assert shared_secret_sender == shared_secret_recipient\n+\n+# Derive an independent 256-bit AES key from the KEM shared secret.\n+salt = os.urandom(16)\n+aead_key = HKDF(\n+    algorithm=hashes.SHA256(),\n+    length=32,\n+    salt=salt,\n+    info=b\"Q-SHIELD ML-KEM-768 demo v1\",\n+).derive(shared_secret_sender)\n+\n+# Encrypt and authenticate a sample message using AES-256-GCM.\n+nonce = os.urandom(12)\n+associated_data = b\"Q-SHIELD demo metadata v1\"\n+plaintext = b\"Q-SHIELD post-quantum migration demonstration\"\n+aesgcm = AESGCM(aead_key)\n+ciphertext = aesgcm.encrypt(nonce, plaintext, associated_data)\n+recovered = aesgcm.decrypt(nonce, ciphertext, associated_data)\n+assert recovered == plaintext\n+\n+print(\"ML-KEM-768 key generation: PASS\")\n+print(\"ML-KEM-768 encapsulation/decapsulation: PASS\")\n+print(\"Shared-secret equality: PASS\")\n+print(\"HKDF-SHA256 key derivation: PASS\")\n+print(\"AES-256-GCM authenticated encryption/decryption: PASS\")\n+print(f\"ML-KEM ciphertext bytes: {len(kem_ciphertext)}\")\n+print(f\"AES-GCM ciphertext bytes (including tag): {len(ciphertext)}\")\n+print(f\"Recovered plaintext matches: {recovered == plaintext}\")"
+      }
+    ],
+    "migration_effectiveness_percent": 5.88,
+    "modern_algorithm_adoptions": [
+      {
+        "file": "ecc_test.py",
+        "line": 1,
+        "algorithm": "AES-256-GCM",
+        "classification": "AUTHENTICATED_ENCRYPTION_ADOPTED",
+        "review_note": "Verify unique nonce generation, authentication-tag handling, associated data and ciphertext format compatibility."
+      },
+      {
+        "file": "ecc_test.py",
+        "line": 11,
+        "algorithm": "AES-256-GCM",
+        "classification": "AUTHENTICATED_ENCRYPTION_ADOPTED",
+        "review_note": "Verify unique nonce generation, authentication-tag handling, associated data and ciphertext format compatibility."
+      },
+      {
+        "file": "ecc_test.py",
+        "line": 28,
+        "algorithm": "SHA-256",
+        "classification": "MODERN_ALGORITHM_ADOPTED",
+        "review_note": "Modern digest configuration/API detected; confirm intended use and protocol compatibility."
+      },
+      {
+        "file": "ecc_test.py",
+        "line": 34,
+        "algorithm": "AES-256-GCM",
+        "classification": "AUTHENTICATED_ENCRYPTION_ADOPTED",
+        "review_note": "Verify unique nonce generation, authentication-tag handling, associated data and ciphertext format compatibility."
+      },
+      {
+        "file": "ecc_test.py",
+        "line": 38,
+        "algorithm": "AES-256-GCM",
+        "classification": "AUTHENTICATED_ENCRYPTION_ADOPTED",
+        "review_note": "Verify unique nonce generation, authentication-tag handling, associated data and ciphertext format compatibility."
+      },
+      {
+        "file": "ecc_test.py",
+        "line": 39,
+        "algorithm": "AES-256-GCM",
+        "classification": "AUTHENTICATED_ENCRYPTION_ADOPTED",
+        "review_note": "Verify unique nonce generation, authentication-tag handling, associated data and ciphertext format compatibility."
+      },
+      {
+        "file": "ecc_test.py",
+        "line": 40,
+        "algorithm": "AES-256-GCM",
+        "classification": "AUTHENTICATED_ENCRYPTION_ADOPTED",
+        "review_note": "Verify unique nonce generation, authentication-tag handling, associated data and ciphertext format compatibility."
+      },
+      {
+        "file": "ecc_test.py",
+        "line": 47,
+        "algorithm": "AES-256-GCM",
+        "classification": "AUTHENTICATED_ENCRYPTION_ADOPTED",
+        "review_note": "Verify unique nonce generation, authentication-tag handling, associated data and ciphertext format compatibility."
+      }
+    ],
+    "conventional_hardening_count": 8,
+    "pqc_migration_status": "PQC_INTEGRATION_STRUCTURE_PRESENT",
+    "effectiveness_note": "Resolved security finding signatures / original security finding signatures. Modern algorithm adoptions are reported separately; heuristic comparison; review context and false positives."
+  },
+  "pqc_verification": {
+    "verification_level": "INTEGRATION_STRUCTURE_PRESENT",
+    "source_checks": {
+      "mlkem_key_generation": true,
+      "mlkem_public_key": true,
+      "mlkem_encapsulation": true,
+      "mlkem_decapsulation": true,
+      "shared_secret_equality_assertion": true,
+      "hkdf_key_derivation": true,
+      "aes_gcm_encryption": true,
+      "aes_gcm_decryption": true
+    },
+    "source_checks_passed": 8,
+    "source_checks_total": 8,
+    "source_evidence": [
+      {
+        "file": "ecc_test.py",
+        "line": 1,
+        "evidence": "\"\"\"Q-SHIELD ML-KEM-768 + HKDF-SHA256 + AES-256-GCM demonstration."
+      },
+      {
+        "file": "ecc_test.py",
+        "line": 3,
+        "evidence": "ML-KEM-768 key establishment follows NIST FIPS 203. AES-GCM is symmetric"
+      },
+      {
+        "file": "ecc_test.py",
+        "line": 10,
+        "evidence": "from cryptography.hazmat.primitives.asymmetric.mlkem import MLKEM768PrivateKey"
+      },
+      {
+        "file": "ecc_test.py",
+        "line": 15,
+        "evidence": "recipient_private_key = MLKEM768PrivateKey.generate()"
+      },
+      {
+        "file": "ecc_test.py",
+        "line": 19,
+        "evidence": "shared_secret_sender, kem_ciphertext = recipient_public_key.encapsulate()"
+      },
+      {
+        "file": "ecc_test.py",
+        "line": 22,
+        "evidence": "shared_secret_recipient = recipient_private_key.decapsulate(kem_ciphertext)"
+      },
+      {
+        "file": "ecc_test.py",
+        "line": 31,
+        "evidence": "info=b\"Q-SHIELD ML-KEM-768 demo v1\","
+      },
+      {
+        "file": "ecc_test.py",
+        "line": 43,
+        "evidence": "print(\"ML-KEM-768 key generation: PASS\")"
+      },
+      {
+        "file": "ecc_test.py",
+        "line": 44,
+        "evidence": "print(\"ML-KEM-768 encapsulation/decapsulation: PASS\")"
+      },
+      {
+        "file": "ecc_test.py",
+        "line": 48,
+        "evidence": "print(f\"ML-KEM ciphertext bytes: {len(kem_ciphertext)}\")"
+      }
+    ],
+    "runtime_self_test": {
+      "status": "NOT_RUN",
+      "detail": "Provider self-test was not run during static comparison; use the explicit verification action to run it."
+    },
+    "classical_residuals": {
+      "RSA": true,
+      "ECC_ECDH_ECDSA": false
+    },
+    "limitations": [
+      "Uploaded source is statically inspected and never executed.",
+      "Runtime self-test independently exercises Q-SHIELD's installed cryptography provider, not uploaded application code.",
+      "Source pattern checks are evidence, not a formal code audit or proof of protocol interoperability.",
+      "A passing provider self-test does not imply that the uploaded project uses the provider or is fully migrated.",
+      "Production migration still requires protocol design, key lifecycle, authentication, error handling, dependency and deployment review."
+    ]
+  },
+  "benchmarks": [],
+  "benchmark_note": "Module 5 historical benchmark records; not asserted to originate from these two uploaded projects."
+}

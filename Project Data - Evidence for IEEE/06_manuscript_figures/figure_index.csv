@@ -1,0 +1,28 @@
+figure,caption,file,source
+1,FIGURE 1. Q-SHIELD system architecture.,06_manuscript_figures/figure_01.png,Q-SHIELD_Updated_References_With_Grayscale_Biographies.docx
+2,FIGURE 2. Same-project comparison output.,06_manuscript_figures/figure_02.png,Q-SHIELD_Updated_References_With_Grayscale_Biographies.docx
+3,FIGURE 3. Identical project archives selected for the negative-control test.,06_manuscript_figures/figure_03.png,Q-SHIELD_Updated_References_With_Grayscale_Biographies.docx
+4,"FIGURE 4. Overview dashboard (ops.pdf, p. 1).",06_manuscript_figures/figure_04.png,Q-SHIELD_Updated_References_With_Grayscale_Biographies.docx
+5,"FIGURE 5. Scanner upload and security findings (ops.pdf, p. 1).",06_manuscript_figures/figure_05.png,Q-SHIELD_Updated_References_With_Grayscale_Biographies.docx
+6,"FIGURE 6. Cryptographic inventory (ops.pdf, p. 2).",06_manuscript_figures/figure_06.png,Q-SHIELD_Updated_References_With_Grayscale_Biographies.docx
+7,"FIGURE 7. Readiness assessment interface (ops.pdf, p. 2).",06_manuscript_figures/figure_07.png,Q-SHIELD_Updated_References_With_Grayscale_Biographies.docx
+8,"FIGURE 8. Audit report recommendations (ops.pdf, p. 3).",06_manuscript_figures/figure_08.png,Q-SHIELD_Updated_References_With_Grayscale_Biographies.docx
+9,"FIGURE 9. Audit report executive summary and inventory (ops.pdf, p. 3).",06_manuscript_figures/figure_09.png,Q-SHIELD_Updated_References_With_Grayscale_Biographies.docx
+10,"FIGURE 10. Assisted migration review (ops.pdf, p. 4).",06_manuscript_figures/figure_10.png,Q-SHIELD_Updated_References_With_Grayscale_Biographies.docx
+11,"FIGURE 11. Migration proposals and review requirements (ops.pdf, p. 4).",06_manuscript_figures/figure_11.png,Q-SHIELD_Updated_References_With_Grayscale_Biographies.docx
+12,"FIGURE 12. Remediation proposals (ops.pdf, p. 5).",06_manuscript_figures/figure_12.png,Q-SHIELD_Updated_References_With_Grayscale_Biographies.docx
+13,"FIGURE 13. Classical and post-quantum benchmarking (ops.pdf, p. 5).",06_manuscript_figures/figure_13.png,Q-SHIELD_Updated_References_With_Grayscale_Biographies.docx
+14,"FIGURE 14. PQC migration lab (ops.pdf, p. 6).",06_manuscript_figures/figure_14.png,Q-SHIELD_Updated_References_With_Grayscale_Biographies.docx
+15,"FIGURE 15. Original and migrated archive selection (ops.pdf, p. 6).",06_manuscript_figures/figure_15.png,Q-SHIELD_Updated_References_With_Grayscale_Biographies.docx
+16,"FIGURE 16. Migration impact overview (ops.pdf, p. 7).",06_manuscript_figures/figure_16.png,Q-SHIELD_Updated_References_With_Grayscale_Biographies.docx
+17,"FIGURE 17. PQC evidence and algorithm distribution (ops.pdf, p. 7).",06_manuscript_figures/figure_17.png,Q-SHIELD_Updated_References_With_Grayscale_Biographies.docx
+18,"FIGURE 18. Migration evidence details (ops.pdf, p. 8).",06_manuscript_figures/figure_18.png,Q-SHIELD_Updated_References_With_Grayscale_Biographies.docx
+19,"FIGURE 19. Resolved and remaining finding details (ops.pdf, p. 8).",06_manuscript_figures/figure_19.png,Q-SHIELD_Updated_References_With_Grayscale_Biographies.docx
+20,"FIGURE 20. Source-code differences (ops.pdf, p. 9).",06_manuscript_figures/figure_20.png,Q-SHIELD_Updated_References_With_Grayscale_Biographies.docx
+21,"FIGURE 21. Benchmark records associated with comparison interface (ops.pdf, p. 9).",06_manuscript_figures/figure_21.png,Q-SHIELD_Updated_References_With_Grayscale_Biographies.docx
+22,"FIGURE 22. End-to-end migration audit (ops.pdf, p. 10).",06_manuscript_figures/figure_22.png,Q-SHIELD_Updated_References_With_Grayscale_Biographies.docx
+23,"FIGURE 23. Migration audit risk and requirements (ops.pdf, p. 10).",06_manuscript_figures/figure_23.png,Q-SHIELD_Updated_References_With_Grayscale_Biographies.docx
+24,"FIGURE 24. Migration recommendations (ops.pdf, p. 11).",06_manuscript_figures/figure_24.png,Q-SHIELD_Updated_References_With_Grayscale_Biographies.docx
+25,"FIGURE 25. Transition roadmap and review guidance (ops.pdf, p. 11).",06_manuscript_figures/figure_25.png,Q-SHIELD_Updated_References_With_Grayscale_Biographies.docx
+26,"FIGURE 26. Audit evidence and governance (ops.pdf, p. 12).",06_manuscript_figures/figure_26.png,Q-SHIELD_Updated_References_With_Grayscale_Biographies.docx
+27,"FIGURE 27. Migration policy findings (ops.pdf, p. 12).",06_manuscript_figures/figure_27.png,Q-SHIELD_Updated_References_With_Grayscale_Biographies.docx

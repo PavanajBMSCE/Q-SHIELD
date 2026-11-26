@@ -1,0 +1,7 @@
+Flask
+Flask-Cors
+cryptography>=50.0.0
+reportlab
+numpy
+python-dotenv
+argon2-cffi>=23.1.0

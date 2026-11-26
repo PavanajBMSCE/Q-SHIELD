@@ -1,0 +1,10 @@
+[
+  {
+    "comparison_id": "2d029f0c-78ae-43ad-8b38-84799ff629e7",
+    "before_name": "test_sample_migration",
+    "after_name": "test_sample_migration",
+    "before_sha256": "fd93df665a42daf3d2d8219393a6bc173876b368cc5257ad205dffc6f0c6f6ec",
+    "after_sha256": "fd93df665a42daf3d2d8219393a6bc173876b368cc5257ad205dffc6f0c6f6ec",
+    "created_at": "2026-11-25 16:28:33"
+  }
+]
